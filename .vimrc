@@ -63,8 +63,8 @@ set splitright
 set splitbelow
 
 " クリップボードを共有する(設定しないとvimとのコピペが面倒です)
-set clipboard+=unnamed
-set clipboard+=autoselect
+"set clipboard+=unnamed
+"set clipboard+=autoselect
 
 " インクリメント、デクリメントを16進数にする(0x0とかにしなければ10進数です。007をインクリメントすると010になるのはデフォルト設定が8進数のため)
 set nf=hex
@@ -177,6 +177,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>X :q!<CR>
 nnoremap <Leader>b :NERDTreeToggle<CR>
+nnoremap <Leader>s :Gstatus<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
