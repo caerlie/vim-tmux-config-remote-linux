@@ -90,6 +90,7 @@ syntax on
 set tags=./tags,tags
 
 " cscope 
+" find . -type f -print | grep -E '\.(c(pp)?|h)$' > cscope.files
 if has("cscope")
         " add any database in current directory
         if filereadable("cscope.out")
