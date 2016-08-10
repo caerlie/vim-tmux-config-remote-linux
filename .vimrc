@@ -240,6 +240,9 @@ nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<cR><CR>
 
+" vs mode search with *
+vnoremap * "zy:let @/ = @z<CR>n
+
 " auto comment off
 augroup auto_comment_off
     autocmd!
