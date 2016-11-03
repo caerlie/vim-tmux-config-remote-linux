@@ -72,6 +72,9 @@ set nf=hex
 set ttyfast
 "set mouse=a
 
+" delete bug fix
+set backspace=indent,eol,start
+
 set gcr=a:block-blinkon0
 set guioptions-=m
 set guioptions-=T
@@ -144,6 +147,8 @@ call plug#end()
 
 " Ctag
 let g:ctrlp_extensions = ['tag']
+" :help g:ctrlp_match_window
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
 
 " Color Set
 set t_Co=256
