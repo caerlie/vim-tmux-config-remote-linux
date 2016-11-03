@@ -231,6 +231,11 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+vmap 0p "0p
+vmap 0P "0P
+nmap 0p "0p
+nmap 0P "0P
+
 " cscope key
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
