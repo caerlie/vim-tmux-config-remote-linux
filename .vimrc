@@ -224,6 +224,8 @@ imap { {}<left>
 "ハイライトをヤメる
 nmap <Leader>, :noh<CR><Esc>
 
+"Switching by number
+nnoremap <F5> :buffers<CR>:buffer<Space>
 
 "au FocusLost,WinLeave * :silent! wa
 "autocmd VimResized * :wincmd =
