@@ -7,6 +7,8 @@ let mapleader = "\<Space>"
 
 " 行番号
 set number
+set relativenumber
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=8
@@ -63,8 +65,9 @@ set splitright
 set splitbelow
 
 " クリップボードを共有する(設定しないとvimとのコピペが面倒です)
-"set clipboard+=unnamed
-"set clipboard+=autoselect
+set clipboard+=unnamed
+set clipboard+=autoselect
+vmap <C-c> :w !xsel -ib<CR><CR>
 
 " インクリメント、デクリメントを16進数にする(0x0とかにしなければ10進数です。007をインクリメントすると010になるのはデフォルト設定が8進数のため)
 set nf=hex
@@ -149,6 +152,8 @@ call plug#end()
 let g:ctrlp_extensions = ['tag']
 " :help g:ctrlp_match_window
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+" :help g:ctrlp_working_path_mode
+let g:ctrlp_working_path_mode = 'rw'
 
 " Color Set
 set t_Co=256
@@ -195,6 +200,9 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>X :q!<CR>
 nnoremap <Leader>b :NERDTreeToggle<CR>
+nnoremap <Leader>B :NERDTreeFind<CR>
+autocmd vimenter * NERDTree
+
 nnoremap <Leader>s :Gstatus<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
@@ -207,7 +215,8 @@ nnoremap <silent> <Left> :vertical resize -5<cr>
 nnoremap <silent> <Up> :resize +5<cr>
 nnoremap <silent> <Down> :resize -5<cr>
 
-map <silent> <C-]> g<C-]>
+nnoremap <silent> <C-]> g<C-]>
+nnoremap <silent> <C-w>m <C-w>vg<C-]>
 
 nmap <silent> <Leader>r :TagbarToggle<CR>
 nmap <silent> <Leader>sw :FSHere<CR>
@@ -253,6 +262,16 @@ nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<cR><CR>
 
+" split instead of a horizontal one
+nmap <C-\>S :vert scs find s <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>G :vert scs find g <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>C :vert scs find c <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>T :vert scs find t <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>E :vert scs find e <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>F :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
+nmap <C-\>I :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>D :vert scs find d <C-R>=expand("<cword>")<cR><CR>
+
 " vs mode search with *
 vnoremap * "zy:let @/ = @z<CR>n
 
@@ -262,4 +281,27 @@ augroup auto_comment_off
     autocmd BufEnter * setlocal formatoptions-=r
     autocmd BufEnter * setlocal formatoptions-=o
 augroup END
+
+" 編集中のファイルパスをクリップボードにコピーする
+function! g:CopyFilePath()
+  let @+ = expand("%:p")
+  echo @+
+endfunction
+ 
+" 編集中のファイル名をクリップボードにコピーする
+function! g:CopyFileName()
+  let @+ = expand("%:t")
+  echo @+
+endfunction
+ 
+" 編集中のファイルの存在するフォルダのパスをクリップボードにコピーする
+function! g:CopyFolderPath()
+  let @+ = expand("%:p:h")
+  echo @+
+endfunction
+ 
+" コマンドとして実行できるようにする
+command! CopyFilePath :call g:CopyFilePath()
+command! CopyFileName :call g:CopyFileName()
+command! CopyFolderPath :call g:CopyFolderPath()
 
