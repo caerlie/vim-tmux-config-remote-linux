@@ -34,7 +34,7 @@ if [ -e tag.file ]; then
 fi
 
 # create new tag.file
-find . -type f -print | grep -E '\.(c(pp)?|h)$' | grep -v -E ${EXCLUDEFILE} > tag.file
+find . -type f -print | grep -E '\.(c(pp)?|h|java|kt|xml)$' | grep -v -E ${EXCLUDEFILE} > tag.file
 echo "tag.file created"
 
 # cscope
